@@ -30,9 +30,9 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
-async function startServer() {
+export function buildApp() {
   const app = express();
-  const server = createServer(app);
+
   // Configure body parser with larger size limit for file uploads
   app.use(
     express.json({
@@ -42,6 +42,7 @@ async function startServer() {
       },
     })
   );
+
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   app.use(cookieParser());
   app.use(protectAdminRoutes);
@@ -56,11 +57,23 @@ async function startServer() {
       createContext,
     })
   );
-  // development mode uses Vite, production mode uses static files
+
+  // In production the static serving will be attached when building the server bundle.
+  // For local dev, startServer will call setupVite before listening.
+  if (process.env.NODE_ENV !== "development") {
+    serveStatic(app);
+  }
+
+  return app;
+}
+
+export const app = buildApp();
+
+export async function startServer() {
+  const server = createServer(app);
+
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
-  } else {
-    serveStatic(app);
   }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
@@ -75,4 +88,7 @@ async function startServer() {
   });
 }
 
-startServer().catch(console.error);
+// Only auto-start when not running inside Vercel (Vercel sets process.env.VERCEL = '1')
+if (!process.env.VERCEL) {
+  startServer().catch(console.error);
+}
