@@ -2,12 +2,12 @@ import { COOKIE_NAME } from "../shared/const.js";
 import { getSessionCookieOptions } from "./_core/cookies.js";
 import { systemRouter } from "./_core/systemRouter.js";
 import { publicProcedure, router } from "./_core/trpc.js";
-import { productsRouter } from "./routers/products";
-import { ordersRouter } from "./routers/orders";
-import { adminAuthRouter } from "./routers/admin-auth";
-import { customerAuthRouter } from "./routers/customer-auth";
-import { discountCodesRouter } from "./routers/discount-codes";
-import { storeSettingsRouter } from "./routers/store-settings";
+import { productsRouter } from "./routers/products.js";
+import { ordersRouter } from "./routers/orders.js";
+import { adminAuthRouter } from "./routers/admin-auth.js";
+import { customerAuthRouter } from "./routers/customer-auth.js";
+import { discountCodesRouter } from "./routers/discount-codes.js";
+import { storeSettingsRouter } from "./routers/store-settings.js";
 
 export const appRouter = router({
   system: systemRouter,
