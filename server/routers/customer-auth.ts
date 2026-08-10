@@ -1,14 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { publicProcedure, router } from "../_core/trpc.js";
 import { SignJWT, jwtVerify } from "jose";
-import { ENV } from "../_core/env";
+import { ENV } from "../_core/env.js";
 import {
   createCustomer,
   findCustomerByEmail,
   updateCustomerLastLogin,
   verifyPassword,
-} from "../db-customers";
+} from "../db-customers.js";
 
 const CUSTOMER_COOKIE_NAME = "customer_session";
 const JWT_EXPIRY = "7d";

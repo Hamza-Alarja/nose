@@ -1,8 +1,8 @@
 import express from "express";
 import multer, { MulterError } from "multer";
-import { storagePut } from "../storage";
+import { storagePut } from "../storage.js";
 import crypto from "node:crypto";
-import { verifyAdminSession } from "./adminGuard";
+import { verifyAdminSession } from "./adminGuard.js";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 const IMAGE_TYPES = {

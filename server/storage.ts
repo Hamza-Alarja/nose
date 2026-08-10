@@ -5,7 +5,7 @@ import {
 } from "@aws-sdk/client-s3";
 import crypto from "node:crypto";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { ENV } from "./_core/env";
+import { ENV } from "./_core/env.js";
 
 function normalizeKey(relKey: string): string {
   return relKey.replace(/^\/+/, "");

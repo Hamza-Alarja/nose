@@ -1,14 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
-import { getDb } from "../db";
-import { discountCodes } from "../../drizzle/schema";
+import { protectedProcedure, publicProcedure, router } from "../_core/trpc.js";
+import { getDb } from "../db.js";
+import { discountCodes } from "../../drizzle/schema.js";
 import { and, eq } from "drizzle-orm";
 import {
   listDiscountCodes,
   normalizeDiscountCode,
   validateDiscountPreview,
-} from "../db-discounts";
+} from "../db-discounts.js";
 
 const codeInput = z
   .object({

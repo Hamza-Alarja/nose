@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { adminProcedure, publicProcedure, router } from "../_core/trpc";
-import { getStoreSettings, upsertStoreSettings } from "../db-store-settings";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc.js";
+import { getStoreSettings, upsertStoreSettings } from "../db-store-settings.js";
 
 const nullableUrl = z
   .string()

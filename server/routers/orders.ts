@@ -5,13 +5,13 @@ import {
   customerProcedure,
   publicProcedure,
   router,
-} from "../_core/trpc";
+} from "../_core/trpc.js";
 import {
   buildZiinaPaymentIntentRequest,
   convertAmountToFils,
   extractZiinaRedirectUrl,
   sanitizeZiinaErrorBody,
-} from "../_core/ziina";
+} from "../_core/ziina.js";
 import {
   createOrderWithStock,
   InactiveProductError,
@@ -25,8 +25,8 @@ import {
   releaseOrderStock,
   updateOrderPayment,
   updateOrderStatus,
-} from "../db-products";
-import { notifyOwner } from "../_core/notification";
+} from "../db-products.js";
+import { notifyOwner } from "../_core/notification.js";
 
 async function createZiinaPaymentLink(opts: {
   amountFils: number;

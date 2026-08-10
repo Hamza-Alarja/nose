@@ -5,11 +5,11 @@ import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "../routers.js";
-import { createContext } from "./context";
-import { serveStatic, setupVite } from "./vite";
-import { registerWebhooks } from "../webhooks";
-import { protectAdminRoutes } from "./adminGuard";
-import { registerUploadRoutes } from "./upload";
+import { createContext } from "./context.js";
+import { serveStatic, setupVite } from "./vite.js";
+import { registerWebhooks } from "../webhooks.js";
+import { protectAdminRoutes } from "./adminGuard.js";
+import { registerUploadRoutes } from "./upload.js";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {

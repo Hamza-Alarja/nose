@@ -6,9 +6,9 @@ import {
   getAllProducts,
   getProductById,
   updateProduct,
-} from "../db-products";
-import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
-import { storagePut } from "../storage";
+} from "../db-products.js";
+import { protectedProcedure, publicProcedure, router } from "../_core/trpc.js";
+import { storagePut } from "../storage.js";
 
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
   if (ctx.user.role !== "admin") {
