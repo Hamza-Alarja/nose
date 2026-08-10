@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig } from "vite";
 
+const isVercel = process.env.VERCEL === "1" || process.env.VERCEL === "true";
 const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig({
@@ -19,8 +20,10 @@ export default defineConfig({
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
+    outDir: isVercel
+      ? path.resolve(import.meta.dirname, "public")
+      : path.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: !isVercel,
   },
   server: {
     host: true,

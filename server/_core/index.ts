@@ -60,7 +60,7 @@ export function buildApp() {
 
   // In production the static serving will be attached when building the server bundle.
   // For local dev, startServer will call setupVite before listening.
-  if (process.env.NODE_ENV !== "development") {
+  if (process.env.NODE_ENV !== "development" && !process.env.VERCEL) {
     serveStatic(app);
   }
 
