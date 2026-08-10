@@ -1,6 +1,6 @@
 import { and, eq, like } from "drizzle-orm";
-import { discountCodes, products } from "../drizzle/schema";
-import { getDb } from "./db";
+import { discountCodes, products } from "../drizzle/schema.js";
+import { getDb } from "./db.js";
 
 export type DiscountType = "percentage" | "fixed";
 export const normalizeDiscountCode = (code: string) =>

@@ -7,11 +7,11 @@ import {
   orders,
   products,
   discountCodes,
-} from "../drizzle/schema";
-import { getDb } from "./db";
+} from "../drizzle/schema.js";
+import { getDb } from "./db.js";
 import { nanoid } from "nanoid";
-import { normalizeDiscountCode } from "./db-discounts";
-import { calculateShippingFils, getStoreSettings } from "./db-store-settings";
+import { normalizeDiscountCode } from "./db-discounts.js";
+import { calculateShippingFils, getStoreSettings } from "./db-store-settings.js";
 
 const DEFAULT_TAX_AED = "0.00";
 const DEFAULT_DISCOUNT_AED = "0.00";

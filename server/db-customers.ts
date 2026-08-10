@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import { users } from "../drizzle/schema";
-import { getDb } from "./db";
+import { users } from "../drizzle/schema.js";
+import { getDb } from "./db.js";
 import { randomBytes, scryptSync } from "crypto";
 
 const SALT_LENGTH = 16;

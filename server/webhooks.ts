@@ -4,11 +4,11 @@ import {
   releaseOrderStock,
   updateOrderPayment,
   updateOrderStatus,
-} from "./db-products";
-import { getDb } from "./db";
-import { orders } from "../drizzle/schema";
+} from "./db-products.js";
+import { getDb } from "./db.js";
+import { orders } from "../drizzle/schema.js";
 import { eq } from "drizzle-orm";
-import { getRawBodyBuffer, processZiinaWebhookEvent } from "./_core/ziina";
+import { getRawBodyBuffer, processZiinaWebhookEvent } from "./_core/ziina.js";
 
 function verifyZiinaSignature(req: Request): boolean {
   const signatureHeader = [

@@ -1,6 +1,6 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import { jwtVerify } from "jose";
-import type { User } from "../../drizzle/schema";
+import type { User } from "../../drizzle/schema.js";
 import { ENV } from "./env.js";
 
 const ADMIN_COOKIE_NAME = "admin_session";

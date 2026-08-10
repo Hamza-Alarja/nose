@@ -1,9 +1,9 @@
 import "dotenv/config";
 import readline from "node:readline/promises";
 import { stdin, stdout } from "node:process";
-import { adminUsers } from "../drizzle/schema";
-import { getDb } from "../server/db";
-import { createAdminUser, getAdminByEmail } from "../server/db-admin";
+import { adminUsers } from "../drizzle/schema.js";
+import { getDb } from "../server/db.js";
+import { createAdminUser, getAdminByEmail } from "../server/db-admin.js";
 
 async function prompt(question: string): Promise<string> {
   const rl = readline.createInterface({ input: stdin, output: stdout });

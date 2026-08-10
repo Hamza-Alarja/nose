@@ -1,10 +1,10 @@
 import { eq } from "drizzle-orm";
-import { getDb } from "./db";
+import { getDb } from "./db.js";
 import {
   storeSettings,
   type InsertStoreSettings,
   type StoreSettings,
-} from "../drizzle/schema";
+} from "../drizzle/schema.js";
 
 export const DEFAULT_STORE_SETTINGS = {
   id: 1,

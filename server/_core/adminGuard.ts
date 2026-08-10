@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { jwtVerify } from "jose";
-import { ENV } from "./env";
+import { ENV } from "./env.js";
 
 export async function verifyAdminSession(req: Request): Promise<boolean> {
   const token = req.cookies?.admin_session;
