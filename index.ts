@@ -1,5 +1,5 @@
 import express from "express";
-import { buildApp } from "./server/_core/index";
+import { buildApp } from "./server/_core/index.js";
 
 const app: express.Application = buildApp();
 
