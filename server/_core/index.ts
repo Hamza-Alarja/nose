@@ -1,14 +1,7 @@
 import "dotenv/config";
-import express from "express";
-import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import net from "net";
-import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "../routers.js";
-import { createContext } from "./context.js";
-import { registerWebhooks } from "../webhooks.js";
-import { protectAdminRoutes } from "./adminGuard.js";
-import { registerUploadRoutes } from "./upload.js";
+import { app, buildApp } from "./app.js";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -29,40 +22,7 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
-export function buildApp() {
-  const app = express();
-
-  // Configure body parser with larger size limit for file uploads
-  app.use(
-    express.json({
-      limit: "2mb",
-      verify: (req, _res, buf) => {
-        (req as express.Request & { rawBody?: Buffer }).rawBody = buf;
-      },
-    })
-  );
-
-  app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  app.use(cookieParser());
-  app.use(protectAdminRoutes);
-  // Register upload endpoints (multipart/form-data -> S3)
-  registerUploadRoutes(app);
-  registerWebhooks(app);
-  // tRPC API
-  app.use(
-    "/api/trpc",
-    createExpressMiddleware({
-      router: appRouter,
-      createContext,
-    })
-  );
-
-  // In production the static serving will be attached when building the server bundle.
-  // For local dev, startServer will call setupVite before listening.
-  return app;
-}
-
-export const app = buildApp();
+export { app, buildApp };
 
 export async function startServer() {
   const server = createServer(app);
