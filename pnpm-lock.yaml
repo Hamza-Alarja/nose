@@ -160,6 +160,9 @@ importers:
       jose:
         specifier: 6.1.0
         version: 6.1.0
+      lightningcss-linux-x64-gnu:
+        specifier: 1.32.0
+        version: 1.32.0
       lucide-react:
         specifier: ^0.453.0
         version: 0.453.0(react@19.2.1)
@@ -8068,8 +8071,7 @@ snapshots:
   lightningcss-linux-arm64-musl@1.32.0:
     optional: true
 
-  lightningcss-linux-x64-gnu@1.32.0:
-    optional: true
+  lightningcss-linux-x64-gnu@1.32.0: {}
 
   lightningcss-linux-x64-musl@1.32.0:
     optional: true
