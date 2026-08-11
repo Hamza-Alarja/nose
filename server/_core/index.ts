@@ -6,7 +6,6 @@ import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "../routers.js";
 import { createContext } from "./context.js";
-import { serveStatic, setupVite } from "./vite.js";
 import { registerWebhooks } from "../webhooks.js";
 import { protectAdminRoutes } from "./adminGuard.js";
 import { registerUploadRoutes } from "./upload.js";
@@ -60,10 +59,6 @@ export function buildApp() {
 
   // In production the static serving will be attached when building the server bundle.
   // For local dev, startServer will call setupVite before listening.
-  if (process.env.NODE_ENV !== "development" && !process.env.VERCEL) {
-    serveStatic(app);
-  }
-
   return app;
 }
 
@@ -73,7 +68,11 @@ export async function startServer() {
   const server = createServer(app);
 
   if (process.env.NODE_ENV === "development") {
+    const { setupVite } = await import("./vite.js");
     await setupVite(app, server);
+  } else if (!process.env.VERCEL) {
+    const { serveStatic } = await import("./vite.js");
+    serveStatic(app);
   }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
