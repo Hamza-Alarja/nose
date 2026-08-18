@@ -7,82 +7,79 @@ export default function StorefrontFooter() {
   const { t, isRTL, locale } = useI18n();
   const { data: storeSettings } = trpc.storeSettings.get.useQuery(undefined);
 
+  const shopLinks = [
+    { label: t.nav_shop, href: "/shop" },
+    { label: t.section_new_arrivals, href: "/shop?filter=new" },
+    { label: t.section_bestsellers, href: "/shop" },
+    { label: t.category_men, href: "/shop?category=men" },
+    { label: t.category_women, href: "/shop?category=women" },
+  ];
+
+  const storeInfoItems = [
+    locale === "ar" ? "شحن داخل الإمارات" : "Delivery across the UAE",
+    locale === "ar" ? "دفع آمن وسهل" : "Secure and easy payment",
+    locale === "ar" ? "منتجات مختارة بعناية" : "Carefully selected products",
+  ];
+
+  const storeAddressText =
+    locale === "ar"
+      ? storeSettings?.storeAddressAr ||
+        storeSettings?.storeAddressEn ||
+        t.footer_tagline
+      : storeSettings?.storeAddressEn ||
+        storeSettings?.storeAddressAr ||
+        t.footer_tagline;
+
+  const locationText = t.footer_location;
+  const shouldShowLocation =
+    !storeAddressText.includes(locationText) &&
+    !storeAddressText.toLowerCase().includes("dubai") &&
+    !storeAddressText.includes("دبي");
+
   return (
     <footer className="bg-[#171311] text-[#F6F0E6]">
-      <div className="container py-10">
+      <div className="container py-10 md:py-12">
         <div
-          className={`grid gap-8 md:grid-cols-4 ${isRTL ? "text-right" : ""}`}
+          className={`grid gap-8 md:grid-cols-[1.2fr_1fr_1.1fr] ${isRTL ? "text-right" : "text-left"}`}
         >
-          <div className="md:col-span-1">
-            <span className="font-heading text-xl uppercase tracking-[0.24em] text-[#F6F0E6]">
+          <div className="max-w-md">
+            <span
+              className={`inline-block font-heading text-2xl uppercase text-[#F6F0E6] ${
+                isRTL ? "tracking-normal font-arabic" : "tracking-[0.22em]"
+              }`}
+            >
               {storeSettings?.storeName || "NOSE"}
             </span>
             <p
-              className={`mt-3 text-sm leading-7 text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
+              className={`mt-4 text-sm leading-7 text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
             >
-              {locale === "ar"
-                ? storeSettings?.storeAddressAr ||
-                  storeSettings?.storeAddressEn ||
-                  t.footer_tagline
-                : storeSettings?.storeAddressEn ||
-                  storeSettings?.storeAddressAr ||
-                  t.footer_tagline}
+              {storeAddressText}
             </p>
-            <div
-              className={`mt-4 flex gap-3 ${isRTL ? "flex-row-reverse justify-end" : ""}`}
-            >
-              {storeSettings?.instagramUrl ? (
-                <a
-                  href={storeSettings.instagramUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#B78A45]/25 p-2 text-[#E7D7BF] transition-colors hover:text-[#B78A45]"
-                >
-                  <Instagram size={16} />
-                </a>
-              ) : null}
-              {storeSettings?.twitterUrl ? (
-                <a
-                  href={storeSettings.twitterUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#B78A45]/25 p-2 text-[#E7D7BF] transition-colors hover:text-[#B78A45]"
-                >
-                  <Twitter size={16} />
-                </a>
-              ) : null}
-              {storeSettings?.facebookUrl ? (
-                <a
-                  href={storeSettings.facebookUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#B78A45]/25 p-2 text-[#E7D7BF] transition-colors hover:text-[#B78A45]"
-                >
-                  <Facebook size={16} />
-                </a>
-              ) : null}
-            </div>
+            {shouldShowLocation ? (
+              <p
+                className={`mt-3 text-sm leading-7 text-[#D9C8AF] ${isRTL ? "font-arabic" : ""}`}
+              >
+                {locationText}
+              </p>
+            ) : null}
           </div>
 
           <div>
             <h4
-              className={`text-[11px] font-medium uppercase tracking-[0.32em] text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
+              className={`text-[11px] font-medium uppercase text-[#E7D7BF] ${
+                isRTL ? "font-arabic tracking-normal" : "tracking-[0.32em]"
+              }`}
             >
               {t.footer_shop}
             </h4>
-            <ul className="mt-4 space-y-2">
-              {[
-                t.nav_shop,
-                t.section_new_arrivals,
-                t.section_bestsellers,
-                t.section_collections,
-              ].map(label => (
-                <li key={label}>
+            <ul className="mt-4 space-y-3">
+              {shopLinks.map(link => (
+                <li key={link.href}>
                   <Link
-                    href="/shop"
+                    href={link.href}
                     className={`text-sm text-[#E7D7BF] transition-colors hover:text-[#B78A45] ${isRTL ? "font-arabic" : ""}`}
                   >
-                    {label}
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -91,43 +88,21 @@ export default function StorefrontFooter() {
 
           <div>
             <h4
-              className={`text-[11px] font-medium uppercase tracking-[0.32em] text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
+              className={`text-[11px] font-medium uppercase text-[#E7D7BF] ${
+                isRTL ? "font-arabic tracking-normal" : "tracking-[0.32em]"
+              }`}
             >
-              {t.footer_help}
+              {t.footer_store_info}
             </h4>
-            <ul className="mt-4 space-y-2">
-              {["FAQ", "Shipping", "Returns", "Contact"].map(label => (
-                <li key={label}>
-                  <a
-                    href="#"
-                    className="text-sm text-[#E7D7BF] transition-colors hover:text-[#B78A45]"
-                  >
-                    {label}
-                  </a>
+            <ul className="mt-4 space-y-3">
+              {storeInfoItems.map(item => (
+                <li
+                  key={item}
+                  className={`text-sm text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
+                >
+                  {item}
                 </li>
               ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4
-              className={`text-[11px] font-medium uppercase tracking-[0.32em] text-[#E7D7BF] ${isRTL ? "font-arabic" : ""}`}
-            >
-              {t.footer_legal}
-            </h4>
-            <ul className="mt-4 space-y-2">
-              {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
-                label => (
-                  <li key={label}>
-                    <a
-                      href="#"
-                      className="text-sm text-[#E7D7BF] transition-colors hover:text-[#B78A45]"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                )
-              )}
             </ul>
           </div>
         </div>
@@ -138,7 +113,6 @@ export default function StorefrontFooter() {
           <p className={`text-xs text-[#8C857D] ${isRTL ? "font-arabic" : ""}`}>
             {t.footer_rights}
           </p>
-       
         </div>
       </div>
     </footer>

@@ -97,7 +97,9 @@ export interface Translations {
   newsletter_cta: string;
   // Footer
   footer_tagline: string;
+  footer_location: string;
   footer_shop: string;
+  footer_store_info: string;
   footer_help: string;
   footer_legal: string;
   footer_rights: string;
@@ -364,8 +366,11 @@ const en: Translations = {
     "Be the first to discover new scents and exclusive offers.",
   newsletter_placeholder: "Your email address",
   newsletter_cta: "Subscribe",
-  footer_tagline: "Crafting memories, one scent at a time.",
+  footer_tagline:
+    "Carefully selected fragrances made to leave a lasting impression.",
+  footer_location: "Dubai, United Arab Emirates",
   footer_shop: "Shop",
+  footer_store_info: "Store Information",
   footer_help: "Help",
   footer_legal: "Legal",
   footer_rights: "© 2026 Nose. All rights reserved.",
@@ -630,8 +635,10 @@ const ar: Translations = {
   newsletter_subtitle: "كن أول من يكتشف العطور الجديدة والعروض الحصرية.",
   newsletter_placeholder: "بريدك الإلكتروني",
   newsletter_cta: "اشترك",
-  footer_tagline: "نصنع الذكريات، عطراً تلو الآخر.",
-  footer_shop: "التسوق",
+  footer_tagline: "عطور مختارة بعناية لتمنحك حضوراً لا يُنسى.",
+  footer_location: "دبي، الإمارات العربية المتحدة",
+  footer_shop: "المتجر",
+  footer_store_info: "معلومات المتجر",
   footer_help: "المساعدة",
   footer_legal: "القانونية",
   footer_rights: "© 2026 Nose. جميع الحقوق محفوظة.",
