@@ -99,6 +99,22 @@
   [dir="rtl"] {
     text-align: right;
   }
+
+  [lang="ar"],
+  [dir="rtl"] {
+    letter-spacing: 0;
+    word-spacing: 0;
+    font-kerning: normal;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "rlig" 1;
+  }
+
+  [lang="ar"] [class*="tracking-"],
+  [dir="rtl"] [class*="tracking-"],
+  [lang="ar"] [style*="letter-spacing"],
+  [dir="rtl"] [style*="letter-spacing"] {
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
+  }
 }
 
 @layer utilities {

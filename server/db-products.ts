@@ -11,7 +11,10 @@ import {
 import { getDb } from "./db.js";
 import { nanoid } from "nanoid";
 import { normalizeDiscountCode } from "./db-discounts.js";
-import { calculateShippingFils, getStoreSettings } from "./db-store-settings.js";
+import {
+  calculateShippingFils,
+  getStoreSettings,
+} from "./db-store-settings.js";
 
 const DEFAULT_TAX_AED = "0.00";
 const DEFAULT_DISCOUNT_AED = "0.00";

@@ -40,7 +40,6 @@ export default function StorefrontHeader() {
   const navLinks = [
     { label: t.nav_home, href: "/" },
     { label: t.nav_shop, href: "/shop" },
-    // { label: t.nav_about, href: "/about" },
   ];
 
   useEffect(() => {
@@ -228,15 +227,6 @@ export default function StorefrontHeader() {
   const mobileNavigationLinks = [
     { label: locale === "ar" ? "الرئيسية" : "Home", href: "/" },
     { label: locale === "ar" ? "المتجر" : "Shop", href: "/shop" },
-    {
-      label: locale === "ar" ? "وصل حديثاً" : "New Arrivals",
-      href: "/shop?filter=new",
-    },
-    {
-      label: locale === "ar" ? "المجموعات" : "Collections",
-      href: "/collections",
-    },
-    { label: locale === "ar" ? "من نحن" : "About", href: "/about" },
   ];
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
